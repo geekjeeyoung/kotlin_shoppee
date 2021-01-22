@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "709185355511",
+    "project_id": "shoppee-bc017",
+    "storage_bucket": "shoppee-bc017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709185355511:android:e496d9e0c032fc8e7d9df2",
+        "android_client_info": {
+          "package_name": "fun.chezcandy.shoppee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709185355511-1t5jc1031g3v8i7otrq8i1ghfdonl5r4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fun.chezcandy.shoppee",
+            "certificate_hash": "56cbfc8ab32e7c2327f006667766c02b67cb94f6"
+          }
+        },
+        {
+          "client_id": "709185355511-jagfu2oaj1pi2kgoucqhls2f1mq2rsr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDXpMKuS-eVIloua6A3f-IBGMQIjEk59Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709185355511-jagfu2oaj1pi2kgoucqhls2f1mq2rsr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
