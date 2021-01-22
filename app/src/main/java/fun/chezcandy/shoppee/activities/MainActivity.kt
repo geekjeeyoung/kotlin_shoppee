@@ -1,5 +1,6 @@
-package `fun`.chezcandy.shoppee
+package `fun`.chezcandy.shoppee.activities
 
+import `fun`.chezcandy.shoppee.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
