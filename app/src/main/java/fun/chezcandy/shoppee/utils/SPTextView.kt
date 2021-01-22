@@ -12,7 +12,7 @@ class SPTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(cont
 
     private fun applyFont() {
         val typeface: Typeface =
-            Typeface.createFromAsset(context.assets, "Montserrat/Montserrat-regular.ttf")
+            Typeface.createFromAsset(context.assets, "Montserrat/Montserrat-Regular.ttf")
         setTypeface(typeface)
     }
 }
