@@ -10,9 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shoppee">
         <activity
+            android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Shoppee.NoActionBar"
+            >
+        </activity>
+        <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Shoppee.NoActionBar">
+
         </activity>
         <activity
             android:name=".activities.SplashActivity"
