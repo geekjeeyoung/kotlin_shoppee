@@ -148,7 +148,7 @@
             android:textColor="@color/colorSecondaryText"
             android:textSize="@dimen/lbl_text_view_textSize" />
 
-        <fun.chezcandy.shoppee.utils.SPTextView
+        <fun.chezcandy.shoppee.utils.SPTextViewBold
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_register"
