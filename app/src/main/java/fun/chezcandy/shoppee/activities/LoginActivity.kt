@@ -1,11 +1,13 @@
 package `fun`.chezcandy.shoppee.activities
 
 import `fun`.chezcandy.shoppee.R
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +24,11 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
+
+        tv_register.setOnClickListener {
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
