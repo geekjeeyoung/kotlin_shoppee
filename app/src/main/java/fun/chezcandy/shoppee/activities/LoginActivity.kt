@@ -3,6 +3,7 @@ package `fun`.chezcandy.shoppee.activities
 import `fun`.chezcandy.shoppee.R
 import `fun`.chezcandy.shoppee.firestore.FirestoreClass
 import `fun`.chezcandy.shoppee.models.User
+import `fun`.chezcandy.shoppee.utils.Constants
 
 import android.content.Intent
 import android.os.Build
@@ -108,6 +109,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
         if (user.profileCompleted == 0) {
             val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
             startActivity(intent)
         } else {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
