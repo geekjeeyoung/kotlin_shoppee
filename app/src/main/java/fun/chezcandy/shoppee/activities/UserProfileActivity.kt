@@ -28,7 +28,8 @@ import java.io.IOException
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var mUserDetails: User
-
+    private var mSelectedImageFileUri: Uri? = null
+    private var mUserProfileImageURL: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,33 +91,46 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 R.id.btn_save -> {
                     if (validateUserProfileDetails()) {
 
-                        val userHashmap = HashMap<String, Any>()
-
-                        val mobileNumber = et_mobile_number.text.toString().trim { it <= ' ' }
-
-                        val gender = if (rb_male.isChecked) {
-                            Constants.MALE
-                        } else {
-                            Constants.FEMALE
-                        }
-
-
-                        if (mobileNumber.isNotEmpty()) {
-                            userHashmap[Constants.MOBILE] = mobileNumber.toLong()
-                        }
-
-                        userHashmap[Constants.GENDER] = gender
-
                         showProgressDialog(resources.getString(R.string.please_wait))
 
-                        FirestoreClass().updateUserProfileData(this, userHashmap)
-
-//                        showErrorSnackBar("Your details are valid. You can update them", false)
-
+                        if (mSelectedImageFileUri != null) {
+                            FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
+                        } else {
+                            updateUserProfileDetails()
+                        }
                     }
                 }
             }
         }
+    }
+
+    private fun updateUserProfileDetails() {
+        val userHashmap = HashMap<String, Any>()
+
+        val mobileNumber = et_mobile_number.text.toString().trim { it <= ' ' }
+
+        val gender = if (rb_male.isChecked) {
+            Constants.MALE
+        } else {
+            Constants.FEMALE
+        }
+
+        userHashmap[Constants.PROFILE_COMPLETED] = 1
+
+        if (mUserProfileImageURL.isNotEmpty()) {
+            userHashmap[Constants.IMAGE] = mUserProfileImageURL
+        }
+
+
+        if (mobileNumber.isNotEmpty()) {
+            userHashmap[Constants.MOBILE] = mobileNumber.toLong()
+        }
+
+        userHashmap[Constants.GENDER] = gender
+
+
+
+        FirestoreClass().updateUserProfileData(this, userHashmap)
     }
 
 
@@ -162,9 +176,9 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             if (requestCode == Constants.PICK_IMAGE_REQUEST_CODE) {
                 if (data != null) {
                     try {
-                        val selectedImageFileUri = data.data!!
+                        mSelectedImageFileUri = data.data!!
 
-                        GlideLoader(this).loadUserPicture(selectedImageFileUri, iv_user_photo)
+                        GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!, iv_user_photo)
 
 //                        iv_user_photo.setImageURI(selectedImageFileUri)
                     } catch (e: IOException) {
@@ -192,5 +206,10 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 true
             }
         }
+    }
+
+    fun imageUploadSuccess(imageURL: String) {
+        mUserProfileImageURL = imageURL
+        updateUserProfileDetails()
     }
 }

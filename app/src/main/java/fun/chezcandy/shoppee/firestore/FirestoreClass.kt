@@ -8,10 +8,13 @@ import `fun`.chezcandy.shoppee.utils.Constants
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class FirestoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()
@@ -109,5 +112,43 @@ class FirestoreClass {
                     e
                 )
             }
+    }
+
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "." + Constants.getFileExtension(
+                activity,
+                imageFileURI
+            )
+        )
+        sRef.putFile(imageFileURI!!).addOnSuccessListener { taskSnapshot ->
+
+            Log.e(
+                "Firebase Image URL",
+                taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
+            )
+
+            taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
+                Log.e("Downloadable Image URL", uri.toString())
+
+
+                when (activity) {
+                    is UserProfileActivity -> {
+                        activity.imageUploadSuccess(uri.toString())
+                    }
+                }
+            }
+        }.addOnFailureListener { exception ->
+
+            when (activity) {
+                is UserProfileActivity -> {
+                    activity.hideProgressDialog()
+                }
+            }
+
+            Log.e(activity.javaClass.simpleName, exception.message, exception)
+
+        }
+
     }
 }
