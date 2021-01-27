@@ -1,8 +1,10 @@
 package `fun`.chezcandy.shoppee.activities
 
 import `fun`.chezcandy.shoppee.R
+import `fun`.chezcandy.shoppee.firestore.FirestoreClass
 import `fun`.chezcandy.shoppee.models.User
 import `fun`.chezcandy.shoppee.utils.Constants
+import `fun`.chezcandy.shoppee.utils.GlideLoader
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +13,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.WindowInsets
@@ -23,28 +26,32 @@ import java.io.IOException
 
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
+
+    private lateinit var mUserDetails: User
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        var userDetails: User = User()
+
         if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
             // Get the user details from intent as a ParcelableExtra.
-            userDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+            mUserDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         }
 
         et_first_name.isEnabled = false
-        et_first_name.setText(userDetails.firstName)
+        et_first_name.setText(mUserDetails.firstName)
 
         et_last_name.isEnabled = false
-        et_last_name.setText(userDetails.lastName)
+        et_last_name.setText(mUserDetails.lastName)
 
         et_email.isEnabled = false
-        et_email.setText(userDetails.email)
+        et_email.setText(mUserDetails.email)
 
 
         iv_user_photo.setOnClickListener(this@UserProfileActivity)
-
+        btn_save.setOnClickListener(this@UserProfileActivity)
 
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -80,8 +87,51 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                         )
                     }
                 }
+                R.id.btn_save -> {
+                    if (validateUserProfileDetails()) {
+
+                        val userHashmap = HashMap<String, Any>()
+
+                        val mobileNumber = et_mobile_number.text.toString().trim { it <= ' ' }
+
+                        val gender = if (rb_male.isChecked) {
+                            Constants.MALE
+                        } else {
+                            Constants.FEMALE
+                        }
+
+
+                        if (mobileNumber.isNotEmpty()) {
+                            userHashmap[Constants.MOBILE] = mobileNumber.toLong()
+                        }
+
+                        userHashmap[Constants.GENDER] = gender
+
+                        showProgressDialog(resources.getString(R.string.please_wait))
+
+                        FirestoreClass().updateUserProfileData(this, userHashmap)
+
+//                        showErrorSnackBar("Your details are valid. You can update them", false)
+
+                    }
+                }
             }
         }
+    }
+
+
+    fun userProfileUpdateSuccess() {
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@UserProfileActivity,
+            resources.getString(R.string.msg_profile_update_success),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        startActivity(Intent(this@UserProfileActivity, MainActivity::class.java))
+        finish()
+
     }
 
     override fun onRequestPermissionsResult(
@@ -114,7 +164,9 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                     try {
                         val selectedImageFileUri = data.data!!
 
-                        iv_user_photo.setImageURI(selectedImageFileUri)
+                        GlideLoader(this).loadUserPicture(selectedImageFileUri, iv_user_photo)
+
+//                        iv_user_photo.setImageURI(selectedImageFileUri)
                     } catch (e: IOException) {
                         e.printStackTrace()
                         Toast.makeText(
@@ -127,6 +179,18 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
             Log.e("Request Cancelled", "Image selection cancelled")
+        }
+    }
+
+    private fun validateUserProfileDetails(): Boolean {
+        return when {
+            TextUtils.isEmpty(et_mobile_number.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_mobile_number), true)
+                false
+            }
+            else -> {
+                true
+            }
         }
     }
 }

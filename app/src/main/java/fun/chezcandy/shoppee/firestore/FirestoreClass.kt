@@ -2,6 +2,7 @@ package `fun`.chezcandy.shoppee.firestore
 
 import `fun`.chezcandy.shoppee.activities.LoginActivity
 import `fun`.chezcandy.shoppee.activities.RegisterActivity
+import `fun`.chezcandy.shoppee.activities.UserProfileActivity
 import `fun`.chezcandy.shoppee.models.User
 import `fun`.chezcandy.shoppee.utils.Constants
 import android.app.Activity
@@ -80,6 +81,31 @@ class FirestoreClass {
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while getting user details.",
+                    e
+                )
+            }
+    }
+
+
+    fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
+        mFireStore.collection(Constants.USERS).document(getCurrentUserID()).update(userHashMap)
+            .addOnSuccessListener {
+                when (activity) {
+                    is UserProfileActivity -> {
+                        activity.userProfileUpdateSuccess()
+                    }
+                }
+
+            }.addOnFailureListener { e ->
+                when (activity) {
+                    is UserProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating the user details.",
                     e
                 )
             }
