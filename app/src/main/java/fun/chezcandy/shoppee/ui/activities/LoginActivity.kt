@@ -1,4 +1,4 @@
-package `fun`.chezcandy.shoppee.activities
+package `fun`.chezcandy.shoppee.ui.activities
 
 import `fun`.chezcandy.shoppee.R
 import `fun`.chezcandy.shoppee.firestore.FirestoreClass
@@ -7,14 +7,11 @@ import `fun`.chezcandy.shoppee.utils.Constants
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 

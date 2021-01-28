@@ -1,4 +1,4 @@
-package `fun`.chezcandy.shoppee.activities
+package `fun`.chezcandy.shoppee.ui.activities
 
 import `fun`.chezcandy.shoppee.R
 import `fun`.chezcandy.shoppee.firestore.FirestoreClass
@@ -11,7 +11,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log

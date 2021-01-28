@@ -12,27 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shoppee">
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name="fun.chezcandy.shoppee.ui.activities.DashboardActivity"
             android:label="@string/app_name"></activity>
         <activity
-            android:name=".activities.UserProfileActivity"
+            android:name="fun.chezcandy.shoppee.ui.activities.UserProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Shoppee.NoActionBar" />
         <activity
-            android:name=".activities.ForgotPasswordActivity"
+            android:name="fun.chezcandy.shoppee.ui.activities.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Shoppee.NoActionBar" />
-        <activity android:name=".activities.BaseActivity" />
+        <activity android:name="fun.chezcandy.shoppee.ui.activities.BaseActivity" />
         <activity
-            android:name=".activities.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Shoppee.NoActionBar" />
-        <activity
-            android:name=".activities.LoginActivity"
+            android:name="fun.chezcandy.shoppee.ui.activities.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Shoppee.NoActionBar" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="fun.chezcandy.shoppee.ui.activities.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Shoppee.NoActionBar" />
+        <activity
+            android:name="fun.chezcandy.shoppee.ui.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Shoppee.NoActionBar">
             <intent-filter>
@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="fun.chezcandy.shoppee.ui.activities.MainActivity"
             android:screenOrientation="portrait" />
     </application>
 

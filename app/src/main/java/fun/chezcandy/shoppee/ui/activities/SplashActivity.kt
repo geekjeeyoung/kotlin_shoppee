@@ -1,4 +1,4 @@
-package `fun`.chezcandy.shoppee.activities
+package `fun`.chezcandy.shoppee.ui.activities
 
 import `fun`.chezcandy.shoppee.R
 import android.content.Intent

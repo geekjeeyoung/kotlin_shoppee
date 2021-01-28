@@ -1,13 +1,10 @@
-package `fun`.chezcandy.shoppee.activities
+package `fun`.chezcandy.shoppee.ui.activities
 
 import `fun`.chezcandy.shoppee.R
 import `fun`.chezcandy.shoppee.firestore.FirestoreClass
 import `fun`.chezcandy.shoppee.models.User
-import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.BaseColumns
 import android.text.TextUtils
 import android.view.WindowInsets
 import android.view.WindowManager

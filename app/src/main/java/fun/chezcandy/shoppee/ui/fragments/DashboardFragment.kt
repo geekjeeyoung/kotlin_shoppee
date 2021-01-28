@@ -1,4 +1,4 @@
-package `fun`.chezcandy.shoppee.activities.ui.dashboard
+package `fun`.chezcandy.shoppee.ui.fragments
 
 import `fun`.chezcandy.shoppee.R
 import android.os.Bundle
@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 
 class DashboardFragment : Fragment() {
 
@@ -23,7 +21,7 @@ class DashboardFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
 
-        textView.text = "This is dashboard Fragment"
+        textView.text = "This is Dashboard Fragment"
 
         return root
     }

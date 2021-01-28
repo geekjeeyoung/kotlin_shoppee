@@ -1,9 +1,7 @@
-package `fun`.chezcandy.shoppee.activities
+package `fun`.chezcandy.shoppee.ui.activities
 
 import `fun`.chezcandy.shoppee.R
-import `fun`.chezcandy.shoppee.utils.SPEditText
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager

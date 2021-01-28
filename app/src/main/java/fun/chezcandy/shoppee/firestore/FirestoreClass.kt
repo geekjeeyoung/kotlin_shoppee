@@ -1,8 +1,8 @@
 package `fun`.chezcandy.shoppee.firestore
 
-import `fun`.chezcandy.shoppee.activities.LoginActivity
-import `fun`.chezcandy.shoppee.activities.RegisterActivity
-import `fun`.chezcandy.shoppee.activities.UserProfileActivity
+import `fun`.chezcandy.shoppee.ui.activities.LoginActivity
+import `fun`.chezcandy.shoppee.ui.activities.RegisterActivity
+import `fun`.chezcandy.shoppee.ui.activities.UserProfileActivity
 import `fun`.chezcandy.shoppee.models.User
 import `fun`.chezcandy.shoppee.utils.Constants
 import android.app.Activity
